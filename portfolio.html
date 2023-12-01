@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive personal portfolio Website Design</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+
+    <section class="contact" id="contact">
+        <h2 class="heading">Contact <span>Me!</span></h2>
+        <form action="#" id="form">
+            <div class="input-box">
+                <label for="name">Name:</label>
+                <br>
+                <input type="text" id="name" placeholder="Full Name">
+                <br>
+                <label for="email">Email Address:</label>
+                <br>
+                <input type="email" id="email" placeholder="Email Address">
+            </div>
+            <div class="input-box">
+                <label for="number">Number</label>
+                <br>
+                <input type="number" placeholder="Mobile Number" id="number">
+                <br>
+                <label for="subject">Email subject</label>
+                <br>
+                <input type="text"  id="subject" placeholder="Email Subject">
+                <br>
+            </div>
+            <label for="message">Message</label>
+            <br>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message" id="message"></textarea>
+            <input type="submit" value="Send Message" class="btn">
+        </form>
+        <a href="post.html"><button>get</button></a>
+    </section>
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2023 by kartik| All Rights Reserved.</p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+</footer>
+<script>
+    const form = document.getElementById('form');
+
+    form.addEventListener('submit', function (event)  {
+        event.preventDefault();
+
+        const data1 = {
+            name: form.name.value,
+            email: form.email.value,
+            number: form.number.value,
+            subject:form.subject.value,
+            // message:form.message.value
+        };
+        console.log(data1.name);
+        console.log(data1.email);
+        // console.log(number);
+        // console.log(subject);
+        // console.log(message);
+        // // console.log(data.content);
+
+        // const response = await fetch('http://localhost:3000/getAllPost', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(data)
+        // });
+
+        // if (response.ok) {
+        //     const result = await response.json();
+        //     console.log('Request successful');
+        //     console.log(result);
+        // } else {
+        //     console.log('Request failed');
+        // ]}
+        const datasend=JSON.stringify(data1);
+        var xhr=new XMLHttpRequest();
+        xhr.open("Post","http://localhost:3000/createPost");
+        xhr.setRequestHeader("Content-Type","application/json");
+
+        xhr.onload=function(){
+            if(xhr.status===201){
+                console.log("request");
+                console.log(xhr.responseText);
+                console.log(JSON.parse(xhr.responseText));
+            }
+            else{
+                console.log("error",xhr.status);
+            }
+        }
+
+
+        xhr.onerror=function(){
+            console.log("erro request");
+        }
+        xhr.send(datasend);
+    });
+</script>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+<script src="script.js"></script>
+
+
+
+</body>
+</html>
